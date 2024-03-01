@@ -1,15 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ForumComp from "./ForumComp";
 import { Suspense, useEffect, useState } from "react";
 import axios from "axios";
 
 const Forumpage = () => {
   const [forums, setForum] = useState([]);
+  const params = useParams();
+  const id = params.id;
   useEffect(() => {
     (async () => {
       try {
         const api = import.meta.env.VITE_API;
-        const id = 1;
         const response = await axios.get(
           `${api}core/get-forums/?workspace=${id}`
         );
@@ -35,6 +36,7 @@ const Forumpage = () => {
         <Suspense fallback={<p>Loding</p>}>
           {forums.map((forum) => (
             <ForumComp
+              key={forum.id}
               title={forum.name}
               discription={forum.description}
               id={forum.id}

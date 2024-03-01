@@ -1,37 +1,140 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodoComp from "./TodoComp";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import Select from "react-select";
 
 export default function TodoPage() {
+  const navigate = useNavigate();
+  const [name, setname] = useState();
+  const [date, setdate] = useState();
+  const [member, setmember] = useState();
+  const [data, setdata] = useState();
+  const api = import.meta.env.VITE_API;
+  const params = useParams();
+  const id = params.id;
+  // console.log(id);
+  const [value, setValue] = useState("");
   const [open, setopen] = useState(false);
-  const [todolist, settodolist] = useState([]);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const getdata = async () => {
+      try {
+        const data = await axios.get(`${api}core/get-page/?id=${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setValue(data.data.page);
+        setdata(data.data.details);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const getmember = async () => {
+      try {
+        const memdata = await axios.get(`${api}user/get/`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setmember(memdata.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getmember();
+    getdata();
+  }, []);
+  const addTodo = async (e) => {
+    e.preventDefault();
+    try {
+      const sentdata = {
+        title: name,
+        due_date: date,
+        assigned: member[0].value,
+        page: id,
+      };
+      const reponse = await axios.post(`${api}core/todo/`, sentdata);
+      reponse;
+      if (reponse.status == 201) {
+        window.location.reload();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="w-full  px-8 py-4">
-      <h1 className="text-4xl font-bold">Heading </h1>
-      <p className="mt-5">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum mollitia
-        culpa ducimus ab sequi nulla quam molestias rem debitis vero aliquam
-        magni commodi laborum nostrum, quidem nam perspiciatis ea sit.{" "}
-      </p>
+      <h1 className="text-4xl font-bold">{value.name} </h1>
+      <p className="mt-5">{value.description}</p>
       <div className="flex flex-col mt-4 gap-2 items-start w-[700px]">
-        <TodoComp title="Complete the hackathon" />
+        {data ? (
+          data.map((e, index) => (
+            <TodoComp
+              key={index}
+              title={e.title}
+              complete={e.complete}
+              id={e.id}
+              due_date={e.due_date}
+              // assigned={member.map((i) => {
+              //   if (i.id == e.id) {
+              //     return e.name;
+              //   }
+              // })}
+            />
+          ))
+        ) : (
+          <></>
+        )}
 
         {open ? (
-          <div className="flex bg-base-300 py-2 px-3 rounded-lg justify-between w-full items-center">
-            <div className="flex gap-2">
+          <form className="flex bg-base-300 py-2 px-3 rounded-lg justify-between w-full items-center">
+            <div className="form-control col-span-2">
+              <label className="label">
+                <span className="label-text">Name</span>
+              </label>
               <input
                 type="text"
-                placeholder="Type here"
-                className="input input-ghost w-full max-w-xl "
+                placeholder="Enter todo"
+                className="input input-bordered"
+                value={name}
+                onChange={(e) => setname(e.target.value)}
               />
             </div>
-            <button
-              className="btn btn-active py-1"
-              onClick={() => setopen(false)}
-            >
-              Change
+            <div className="form-control col-span-2">
+              <label className="label">
+                <span className="label-text">Due-date</span>
+              </label>
+              <input
+                type="date"
+                // placeholder="Enter todo"
+                className="input input-bordered"
+                value={date}
+                onChange={(e) => setdate(e.target.value)}
+              />
+            </div>
+            <div className="form-control col-span-2">
+              <label className="label">
+                <span className="label-text">Add members</span>
+              </label>
+              <Select
+                // defaultValue={[colourOptions[2], colourOptions[3]]}
+                isMulti
+                name="colors"
+                options={member}
+                className="basic-multi-select"
+                classNamePrefix="select"
+                onChange={(e) => setmember(e)}
+              />
+            </div>
+
+            <button className="btn btn-active py-1" onClick={addTodo}>
+              Add
             </button>
-          </div>
+          </form>
         ) : (
           <></>
         )}

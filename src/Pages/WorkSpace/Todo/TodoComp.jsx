@@ -1,42 +1,61 @@
+import axios from "axios";
 import { useState } from "react";
 
-const TodoComp = ({ title, id }) => {
+const TodoComp = ({ title, id, complete, due_date, assigned }) => {
   const [pop, setpop] = useState(false);
-  const edit = () => {
-    console.log(id);
+  const [check, Setcheck] = useState();
+  const [titles, settitle] = useState(title);
+  const api = import.meta.env.VITE_API;
+  const edit = async () => {
+    // e.preventDefault();
+    try {
+      const sentdata = {
+        title: titles,
+      };
+      const reponse = await axios.patch(`${api}core/todo/${id}/`, sentdata);
+      reponse;
+      if (reponse.status == 200) {
+        window.location.reload();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="flex bg-base-300 py-2 px-3 rounded-lg justify-between w-full items-center">
-      <div className="">
+      <div className=" w-full">
         {pop ? (
           <div className="flex gap-2">
             <input
               type="text"
               placeholder="Type here"
               className="input input-ghost w-full max-w-xs "
+              value={titles}
+              onChange={(e) => settitle(e.target.value)}
             />
-            <button
-              className="btn btn-active py-1"
-              onClick={() => setpop(false)}
-            >
+            <button className="btn btn-active py-1" onClick={() => edit()}>
               Change
             </button>
           </div>
         ) : (
-          <p className="max-w-96">{title}</p>
+          <div className="flex w-full justify-between px-3">
+            <p className="max-w-96">{title}</p>
+            <p className="max-w-96">nothing</p>
+            <p className="max-w-96 text-error">{due_date}</p>{" "}
+          </div>
         )}
       </div>
       <div className="flex gap-5">
         <input
           type="checkbox"
-          defaultChecked
+          defaultChecked={complete}
           className="checkbox checkbox-primary"
+          onChange={(e) => Setcheck(e.target.checked)}
         />
         <button
           className="flex items-center"
           onClick={() => {
             setpop(true);
-            edit();
           }}
         >
           <svg viewBox="0 0 24 24" fill="currentColor" height="1em" width="1em">

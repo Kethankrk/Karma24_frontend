@@ -6,7 +6,7 @@ const IndiviForum = () => {
 
   Hi! I'm your first Markdown file in **Co-project**. If you want to learn about StackEdit, you can read me. If you want to play with Markdown, you can edit me. Once you have finished with me, you can create new files by opening the **file explorer** on the left corner of the navigation bar.
   `;
-  console.log(param);
+
   return (
     <div className="px-8 py-4">
       <div className="grid grid-cols-9 mb-3 border-b pb-3">

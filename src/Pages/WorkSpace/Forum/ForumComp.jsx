@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const ForumComp = ({ id, title, discription, time, user }) => {
   return (
     <Link
-      to={`/forum/${id}`}
+      to={`/forum-in/${id}`}
       className="grid grid-cols-6 border-t-2  border-b-2 py-3 border-gray-500 w-full "
     >
       <div className="flex flex-col col-span-5 ">

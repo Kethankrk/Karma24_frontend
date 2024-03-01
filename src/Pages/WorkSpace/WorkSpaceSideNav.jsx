@@ -79,7 +79,7 @@ export default function WorkSpaceSideNav() {
   // const firstLetterOfLastName = lastName.charAt(0);
 
   return (
-    <div className="flex flex-col w-2/12 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] h-screen bg-base-200 px-4 py-3 gap-2 ">
+    <div className="flex flex-col w-2/12 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] min-h-screen bg-base-200 px-4 py-3 gap-2 ">
       <div className="flex  items-center gap-2  px-3 w-full py-2">
         <div className="avatar">
           <div className="w-12 rounded-full ">

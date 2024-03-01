@@ -21,7 +21,7 @@ Enter the content
         page: id,
       };
       const reponse = await axios.post(`${api}core/blank-page/`, data);
-      if (reponse.status == 200) {
+      if (reponse.status == 201) {
         window.location.reload();
       }
     } catch (error) {
