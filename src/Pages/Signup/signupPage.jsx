@@ -3,20 +3,52 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function SignupPage() {
-  const [name, Setname] = useState("");
-  const [email, Setemail] = useState("");
-  const [phone, SetPhone] = useState("");
-  const [bio, Setbio] = useState("");
-  const [pass, Setpass] = useState("");
-  const [confimPass, SetConfirmPass] = useState("");
-  const [alert, Setalert] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [bio, setBio] = useState("");
+  const [pass, setPass] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
+  const [alert, setAlert] = useState(false);
   const navigate = useNavigate();
+
+  const randomDataList = [
+    {
+      name: "John Doe",
+      email: "johndoe@example.com",
+      phone: "1234567890",
+      bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      pass: "password123",
+      confirmPass: "password123",
+    },
+    {
+      name: "Jane Smith",
+      email: "janesmith@example.com",
+      phone: "9876543210",
+      bio: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem.",
+      pass: "securepass",
+      confirmPass: "securepass",
+    },
+    // Add more random data entries as needed
+  ];
+
+  const generateRandomData = () => {
+    const randomIndex = Math.floor(Math.random() * randomDataList.length);
+    const randomData = randomDataList[randomIndex];
+    setName(randomData.name);
+    setEmail(randomData.email);
+    setPhone(randomData.phone);
+    setBio(randomData.bio);
+    setPass(randomData.pass);
+    setConfirmPass(randomData.confirmPass);
+  };
+
   const SignUpHandle = async (e) => {
     e.preventDefault();
     const api = import.meta.env.VITE_API;
-    if (pass === confimPass) {
-      Setalert(false);
-      console.log("sent");
+    if (pass === confirmPass) {
+      setAlert(false);
+      console.log("Sending data...");
       try {
         const data = {
           user: {
@@ -31,7 +63,7 @@ export default function SignupPage() {
         };
         const response = await axios.post(`${api}core/signup/`, data);
 
-        if (response.status == 201) {
+        if (response.status === 201) {
           localStorage.setItem("token", response.data.access);
           localStorage.setItem("name", response.data.profile.name);
           localStorage.setItem("image", response.data.profile.image);
@@ -41,9 +73,10 @@ export default function SignupPage() {
         console.log(error);
       }
     } else {
-      Setalert(true);
+      setAlert(true);
     }
   };
+
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">
@@ -53,6 +86,9 @@ export default function SignupPage() {
             <p className="py-6">
               Create user account and enjoy the project time with your friends.
             </p>
+            <button className="btn btn-secondary" onClick={generateRandomData}>
+              Load Random Data
+            </button>
           </div>
           <div className="card shrink-0 w-full max-w-lg shadow-2xl bg-base-100 ">
             <form
@@ -68,7 +104,7 @@ export default function SignupPage() {
                   placeholder="Enter your name"
                   className="input input-bordered"
                   value={name}
-                  onChange={(e) => Setname(e.target.value)}
+                  onChange={(e) => setName(e.target.value)}
                 />
               </div>
               <div className="form-control">
@@ -81,7 +117,7 @@ export default function SignupPage() {
                   className="input input-bordered"
                   required
                   value={email}
-                  onChange={(e) => Setemail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="form-control">
@@ -94,7 +130,7 @@ export default function SignupPage() {
                   className="input input-bordered"
                   required
                   value={phone}
-                  onChange={(e) => SetPhone(e.target.value)}
+                  onChange={(e) => setPhone(e.target.value)}
                 />
               </div>
               <div className="form-control col-span-2">
@@ -119,7 +155,7 @@ export default function SignupPage() {
                   className="input input-bordered"
                   required
                   value={bio}
-                  onChange={(e) => Setbio(e.target.value)}
+                  onChange={(e) => setBio(e.target.value)}
                 />
               </div>
               <div className="md:grid grid-cols-2 gap-1 col-span-2">
@@ -133,7 +169,7 @@ export default function SignupPage() {
                     className="input input-bordered"
                     required
                     value={pass}
-                    onChange={(e) => Setpass(e.target.value)}
+                    onChange={(e) => setPass(e.target.value)}
                   />
                 </div>
                 <div className="form-control">
@@ -141,23 +177,19 @@ export default function SignupPage() {
                     <span className="label-text">Confirm Password</span>
                   </label>
                   <input
-                    type="password"
+                    type="text"
                     placeholder="password"
                     className="input input-bordered"
                     required
-                    value={confimPass}
-                    onChange={(e) => {
-                      SetConfirmPass(e.target.value);
-                    }}
+                    value={confirmPass}
+                    onChange={(e) => setConfirmPass(e.target.value)}
                   />
                 </div>
               </div>
-              {alert ? (
-                <div>
-                  <p className="text-red-500">Password not match</p>
-                </div>
-              ) : (
-                <p></p>
+              {alert && (
+                <p className="text-red-500 col-span-2">
+                  Passwords do not match
+                </p>
               )}
               <div className="form-control col-span-2">
                 <button className="btn btn-primary " type="submit">

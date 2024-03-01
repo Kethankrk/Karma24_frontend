@@ -79,9 +79,9 @@ const Worksapcecard = ({ setpop, pop2, name, id, pages }) => {
                   </a>
                 </li>
               ))}
-              <li>
+              {/* <li>
                 <Link to="/todo">Todu One</Link>
-              </li>
+              </li> */}
               <li>
                 <Link to={`/forum/${id}`}>Forum</Link>
               </li>
