@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { io } from "socket.io-client";
 
+const id = 1;
 function ChatPage() {
   const [chats, Setchats] = useState([
-    { text: "Hello", type: "you" },
-    { text: "Hi", type: "me" },
+    { text: "Hello", isMine: true },
+    { text: "Hi", isMine: false },
   ]);
 
   const [socket, setSocket] = useState(null);
@@ -12,34 +14,33 @@ function ChatPage() {
 
   const SendMessage = (e) => {
     e.preventDefault();
-    if (socket && input.trim() !== "") {
-      socket.send(JSON.stringify({ input }));
-      setInput("");
-    }
+    socket.emit("msg", {
+      message: input,
+      room: id,
+    });
   };
 
   useEffect(() => {
-    const ws = new WebSocket(`ws://localhost:8000/ws/chat/`);
-
-    ws.onopen = () => {
-      console.log("WebSocket connection opened.");
+    const ws = io("ws://192.168.137.219:3000");
+    ws.on("connect", () => {
+      console.log("connected to server");
       setSocket(ws);
-    };
+      ws.emit("join_room", id);
+    });
 
-    ws.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      Setchats((prevChatLog) => [...prevChatLog, data.message]);
-    };
+    ws.on("receive_msg", (msg) => {
+      console.log(msg);
+    });
 
-    ws.onclose = () => {
-      console.log("WebSocket connection closed.");
+    return () => {
+      return socket && socket.disconnect();
     };
   }, []);
   return (
     <main className="px-14 py-10 flex items-center flex-col">
       <div className="max-w-[600px] min-w-[500px] w-full rounded-lg bg-base-300 p-10">
         {chats.map((chat) =>
-          chat.type == "you" ? (
+          !chat.isMine ? (
             <YourMessage text={chat.text} />
           ) : (
             <MyMessage text={chat.text} />
