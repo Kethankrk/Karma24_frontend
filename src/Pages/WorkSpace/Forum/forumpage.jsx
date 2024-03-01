@@ -1,7 +1,25 @@
 import { Link } from "react-router-dom";
 import ForumComp from "./ForumComp";
+import { Suspense, useEffect, useState } from "react";
+import axios from "axios";
 
 const Forumpage = () => {
+  const [forums, setForum] = useState([]);
+  useEffect(() => {
+    (async () => {
+      try {
+        const api = import.meta.env.VITE_API;
+        const id = 1;
+        const response = await axios.get(
+          `${api}core/get-forums/?workspace=${id}`
+        );
+
+        setForum(response.data);
+      } catch (error) {
+        alert(error);
+      }
+    })();
+  }, []);
   return (
     <div className="px-8 py-4 w-full flex flex-col gap-2">
       <div className="flex justify-between">
@@ -14,13 +32,17 @@ const Forumpage = () => {
         </button>
       </div>
       <div className="flex w-full flex-col gap-5">
-        <ForumComp
-          title="Why kethan gay ?"
-          discription="challenge examine grill interrogate interview investigate query quiz search seek."
-          id={1}
-          user={"abhi"}
-          time={"10/2/2024"}
-        />
+        <Suspense fallback={<p>Loding</p>}>
+          {forums.map((forum) => (
+            <ForumComp
+              title={forum.name}
+              discription={forum.description}
+              id={forum.id}
+              user={forum.created_by}
+              time={forum.created_at.split("T")[0]}
+            />
+          ))}
+        </Suspense>
       </div>
     </div>
   );
