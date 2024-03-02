@@ -13,6 +13,7 @@ import IndiviForum from "./Pages/WorkSpace/Forum/IndiviForum";
 import WorkSpaceHome from "./Pages/WorkSpace/workSpaceHome";
 import WorkSpace from "./Pages/WorkSpace/WorkSpace";
 import Createnewpage from "./Pages/WorkSpace/Createnewpage";
+import ChatPage from "./Pages/Chat/ChatPage";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="addpage/:id" element={<Createnewpage />} />
             <Route path="forum/:id" element={<Forumpage />} />
             <Route path="/forum-in/:id" element={<IndiviForum />} />
+            <Route path="/chat/:id" element={<ChatPage />} />
 
             <Route path="/new" element={<NewWorkSpace />} />
             <Route path="/edit" element={<WorkSpaceEdit />} />

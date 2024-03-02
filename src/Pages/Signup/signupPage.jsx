@@ -10,6 +10,7 @@ export default function SignupPage() {
   const [pass, setPass] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
   const [alert, setAlert] = useState(false);
+  const [image, setimage] = useState("");
   const navigate = useNavigate();
 
   const randomDataList = [
@@ -20,6 +21,7 @@ export default function SignupPage() {
       bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       pass: "password123",
       confirmPass: "password123",
+      image: "https://randomuser.me/api/portraits/men/1.jpg",
     },
     {
       name: "Jane Smith",
@@ -28,8 +30,234 @@ export default function SignupPage() {
       bio: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem.",
       pass: "securepass",
       confirmPass: "securepass",
+      image: "https://randomuser.me/api/portraits/women/2.jpg",
     },
-    // Add more random data entries as needed
+    {
+      name: "Michael Johnson",
+      email: "michaeljohnson@example.com",
+      phone: "5555555555",
+      bio: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.",
+      pass: "mikepass",
+      confirmPass: "mikepass",
+      image: "https://randomuser.me/api/portraits/men/6.jpg",
+    },
+    {
+      name: "Sarah Wilson",
+      email: "sarahwilson@example.com",
+      phone: "4444444444",
+      bio: "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.",
+      pass: "sarahpass",
+      confirmPass: "sarahpass",
+      image: "https://randomuser.me/api/portraits/women/7.jpg",
+    },
+    {
+      name: "Chris Thompson",
+      email: "christhompson@example.com",
+      phone: "6666666666",
+      bio: "Consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.",
+      pass: "chrispass",
+      confirmPass: "chrispass",
+      image: "https://randomuser.me/api/portraits/men/8.jpg",
+    },
+    // Add 25 more random data entries
+    {
+      name: "Emily Brown",
+      email: "emilybrown@example.com",
+      phone: "3333333333",
+      bio: "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.",
+      pass: "emilypass",
+      confirmPass: "emilypass",
+      image: "https://randomuser.me/api/portraits/women/9.jpg",
+    },
+    {
+      name: "David Wilson",
+      email: "davidwilson@example.com",
+      phone: "2222222222",
+      bio: "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+      pass: "davidpass",
+      confirmPass: "davidpass",
+      image: "https://randomuser.me/api/portraits/men/10.jpg",
+    },
+    {
+      name: "Jessica Martinez",
+      email: "jessicamartinez@example.com",
+      phone: "7777777777",
+      bio: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      pass: "jessicapass",
+      confirmPass: "jessicapass",
+      image: "https://randomuser.me/api/portraits/women/11.jpg",
+    },
+    {
+      name: "Andrew Taylor",
+      email: "andrewtaylor@example.com",
+      phone: "8888888888",
+      bio: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      pass: "andrewpass",
+      confirmPass: "andrewpass",
+      image: "https://randomuser.me/api/portraits/men/12.jpg",
+    },
+    {
+      name: "Emma Johnson",
+      email: "emmajohnson@example.com",
+      phone: "9999999999",
+      bio: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      pass: "emmapass",
+      confirmPass: "emmapass",
+      image: "https://randomuser.me/api/portraits/women/13.jpg",
+    },
+    {
+      name: "Michael Brown",
+      email: "michaelbrown@example.com",
+      phone: "1111111111",
+      bio: "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.",
+      pass: "michaelpass",
+      confirmPass: "michaelpass",
+      image: "https://randomuser.me/api/portraits/men/14.jpg",
+    },
+    {
+      name: "Olivia Rodriguez",
+      email: "oliviarodriguez@example.com",
+      phone: "2222222222",
+      bio: "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+      pass: "oliviapass",
+      confirmPass: "oliviapass",
+      image: "https://randomuser.me/api/portraits/women/15.jpg",
+    },
+    {
+      name: "Matthew Lee",
+      email: "matthewlee@example.com",
+      phone: "3333333333",
+      bio: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      pass: "matthewpass",
+      confirmPass: "matthewpass",
+      image: "https://randomuser.me/api/portraits/men/16.jpg",
+    },
+    {
+      name: "Isabella Martinez",
+      email: "isabellamartinez@example.com",
+      phone: "4444444444",
+      bio: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      pass: "isabellapass",
+      confirmPass: "isabellapass",
+      image: "https://randomuser.me/api/portraits/women/17.jpg",
+    },
+    {
+      name: "Ethan Taylor",
+      email: "ethantaylor@example.com",
+      phone: "5555555555",
+      bio: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      pass: "ethanpass",
+      confirmPass: "ethanpass",
+      image: "https://randomuser.me/api/portraits/men/18.jpg",
+    },
+    {
+      name: "Sophia Brown",
+      email: "sophiabrown@example.com",
+      phone: "6666666666",
+      bio: "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.",
+      pass: "sophiapass",
+      confirmPass: "sophiapass",
+      image: "https://randomuser.me/api/portraits/women/19.jpg",
+    },
+    {
+      name: "William Garcia",
+      email: "williamgarcia@example.com",
+      phone: "7777777777",
+      bio: "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+      pass: "williampass",
+      confirmPass: "williampass",
+      image: "https://randomuser.me/api/portraits/men/20.jpg",
+    },
+    {
+      name: "Ava Martinez",
+      email: "avamartinez@example.com",
+      phone: "8888888888",
+      bio: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      pass: "avapass",
+      confirmPass: "avapass",
+      image: "https://randomuser.me/api/portraits/women/21.jpg",
+    },
+    {
+      name: "Alexander Lee",
+      email: "alexanderlee@example.com",
+      phone: "9999999999",
+      bio: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      pass: "alexanderpass",
+      confirmPass: "alexanderpass",
+      image: "https://randomuser.me/api/portraits/men/22.jpg",
+    },
+    {
+      name: "Mia Hernandez",
+      email: "miahernandez@example.com",
+      phone: "1111111111",
+      bio: "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.",
+      pass: "miapass",
+      confirmPass: "miapass",
+      image: "https://randomuser.me/api/portraits/women/23.jpg",
+    },
+    {
+      name: "James Garcia",
+      email: "jamesgarcia@example.com",
+      phone: "2222222222",
+      bio: "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+      pass: "jamespass",
+      confirmPass: "jamespass",
+      image: "https://randomuser.me/api/portraits/men/24.jpg",
+    },
+    {
+      name: "Amelia Rodriguez",
+      email: "ameliarodriguez@example.com",
+      phone: "3333333333",
+      bio: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      pass: "ameliapass",
+      confirmPass: "ameliapass",
+      image: "https://randomuser.me/api/portraits/women/25.jpg",
+    },
+    {
+      name: "Benjamin Hernandez",
+      email: "benjaminhernandez@example.com",
+      phone: "4444444444",
+      bio: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      pass: "benjaminpass",
+      confirmPass: "benjaminpass",
+      image: "https://randomuser.me/api/portraits/men/26.jpg",
+    },
+    {
+      name: "Charlotte Lopez",
+      email: "charlottelopez@example.com",
+      phone: "5555555555",
+      bio: "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.",
+      pass: "charlottepass",
+      confirmPass: "charlottepass",
+      image: "https://randomuser.me/api/portraits/women/27.jpg",
+    },
+    {
+      name: "Daniel Taylor",
+      email: "danieltaylor@example.com",
+      phone: "6666666666",
+      bio: "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+      pass: "danielpass",
+      confirmPass: "danielpass",
+      image: "https://randomuser.me/api/portraits/men/28.jpg",
+    },
+    {
+      name: "Chloe Lee",
+      email: "chloelee@example.com",
+      phone: "7777777777",
+      bio: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      pass: "chloepass",
+      confirmPass: "chloepass",
+      image: "https://randomuser.me/api/portraits/women/29.jpg",
+    },
+    {
+      name: "Elijah Brown",
+      email: "elijahbrown@example.com",
+      phone: "8888888888",
+      bio: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      pass: "elijahpass",
+      confirmPass: "elijahpass",
+      image: "https://randomuser.me/api/portraits/men/30.jpg",
+    },
   ];
 
   const generateRandomData = () => {
@@ -39,6 +267,7 @@ export default function SignupPage() {
     setEmail(randomData.email);
     setPhone(randomData.phone);
     setBio(randomData.bio);
+    setimage(randomData.image);
     setPass(randomData.pass);
     setConfirmPass(randomData.confirmPass);
   };
@@ -48,7 +277,6 @@ export default function SignupPage() {
     const api = import.meta.env.VITE_API;
     if (pass === confirmPass) {
       setAlert(false);
-      console.log("Sending data...");
       try {
         const data = {
           user: {
@@ -59,6 +287,7 @@ export default function SignupPage() {
             name: name,
             phone: phone,
             bio: bio,
+            image: image,
           },
         };
         const response = await axios.post(`${api}core/signup/`, data);
@@ -68,6 +297,8 @@ export default function SignupPage() {
           localStorage.setItem("name", response.data.profile.name);
           localStorage.setItem("image", response.data.profile.image);
           navigate("/");
+        } else {
+          alert("User already exist");
         }
       } catch (error) {
         console.log(error);
@@ -140,7 +371,6 @@ export default function SignupPage() {
                 <input
                   type="file"
                   className="file-input file-input-bordered file-input-primary w-full max-w-xs"
-                  required
                 />
               </div>
 

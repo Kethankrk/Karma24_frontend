@@ -15,8 +15,8 @@ const LandingPage = () => {
               #CollaborationGoals
             </p>
             <Link
-              to="/signup"
-              className="hover:shadow-lg shadow-white btn px-8 font-bold text-2xl"
+              to={`/signup`}
+              className="hover:shadow-lg shadow-white btn px-8 font-bold "
             >
               Sign Up
             </Link>

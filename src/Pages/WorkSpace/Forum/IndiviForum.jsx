@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import MDEditor from "@uiw/react-md-editor";
 const IndiviForum = () => {
-  const param = useParams();
-
   const [data, setdata] = useState([{ forum: {}, messages: [] }]);
   const [pop, setpop] = useState(false);
   const firstText = `# Replay them!

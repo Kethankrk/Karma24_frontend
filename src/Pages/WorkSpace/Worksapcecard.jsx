@@ -20,6 +20,9 @@ const Worksapcecard = ({ setpop, pop2, name, id, pages }) => {
                 <Link to={`/workspace/${id}`}>Home</Link>
               </li>
               <li>
+                <Link to={`/chat/${id}`}>Chat</Link>
+              </li>
+              <li>
                 <Link
                   to={`/addpage/${id}`}
                   className="m-1 flex items-center gap-1"

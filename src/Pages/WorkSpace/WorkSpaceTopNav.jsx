@@ -43,7 +43,7 @@ export default function WorkSpaceTopNav() {
         </div>
       </div>
       <div className="navbar-center">
-        <a className="btn btn-ghost text-xl">Project-name</a>
+        {/* <a className="btn btn-ghost text-xl">Project-name</a> */}
       </div>
       <div className="navbar-end">
         <button className="btn btn-ghost btn-circle">
