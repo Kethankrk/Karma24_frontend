@@ -1,4 +1,5 @@
 import MDEditor from "@uiw/react-md-editor";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { io } from "socket.io-client";
@@ -24,6 +25,18 @@ function ChatPage() {
     });
     setInput("");
   };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await axios.get(`http://192.168.137.219:3000/chat/${id}`);
+        console.log(res.data);
+        res.data.reverse().map((item) => Setchats((prev) => [...prev, item]));
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  });
 
   useEffect(() => {
     const ws = io("ws://192.168.137.219:3000");
