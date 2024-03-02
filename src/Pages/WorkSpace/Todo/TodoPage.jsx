@@ -27,6 +27,7 @@ export default function TodoPage() {
         });
         setValue(data.data.page);
         setdata(data.data.details);
+        console.log(data.data.details);
       } catch (error) {
         console.log(error);
       }
@@ -76,14 +77,10 @@ export default function TodoPage() {
             <TodoComp
               key={index}
               title={e.title}
-              complete={e.complete}
+              complete={e.completed}
               id={e.id}
               due_date={e.due_date}
-              // assigned={member.map((i) => {
-              //   if (i.id == e.id) {
-              //     return e.name;
-              //   }
-              // })}
+              assigned={e.assigned.profile.name}
             />
           ))
         ) : (
