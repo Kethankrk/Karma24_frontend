@@ -31,12 +31,17 @@ function ChatPage() {
       try {
         const res = await axios.get(`http://192.168.137.219:3000/chat/${id}`);
         console.log(res.data);
-        res.data.reverse().map((item) => Setchats((prev) => [...prev, item]));
+        res.data.map((item) =>
+          Setchats((prev) => [
+            ...prev,
+            { text: item.message, isMine: name == item.name ? true : false },
+          ])
+        );
       } catch (error) {
         console.log(error);
       }
     })();
-  });
+  }, []);
 
   useEffect(() => {
     const ws = io("ws://192.168.137.219:3000");
