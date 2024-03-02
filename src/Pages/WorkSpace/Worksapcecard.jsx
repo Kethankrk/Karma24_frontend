@@ -23,6 +23,9 @@ const Worksapcecard = ({ setpop, pop2, name, id, pages }) => {
                 <a href={`/chat/${id}`}>Chat</a>
               </li>
               <li>
+                <a href={`/collabe/${id}`}>Collab</a>
+              </li>
+              <li>
                 <a
                   href={`/addpage/${id}`}
                   className="m-1 flex items-center gap-1"

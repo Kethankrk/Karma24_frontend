@@ -14,6 +14,8 @@ import WorkSpaceHome from "./Pages/WorkSpace/workSpaceHome";
 import WorkSpace from "./Pages/WorkSpace/WorkSpace";
 import Createnewpage from "./Pages/WorkSpace/Createnewpage";
 import ChatPage from "./Pages/Chat/ChatPage";
+import CollabarativeTab from "./Pages/WorkSpace/CollabarativeTab";
+import CollabWorkspacePreview from "./Pages/WorkSpace/CollabWorkspacePreview";
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
             <Route path="forum/:id" element={<Forumpage />} />
             <Route path="/forum-in/:id" element={<IndiviForum />} />
             <Route path="/chat/:id" element={<ChatPage />} />
+            <Route path="/collabe/edit/:id" element={<CollabarativeTab />} />
+            <Route path="/collabe/:id" element={<CollabWorkspacePreview />} />
 
             <Route path="/new" element={<NewWorkSpace />} />
             <Route path="/edit" element={<WorkSpaceEdit />} />
