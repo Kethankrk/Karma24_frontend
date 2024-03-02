@@ -14,6 +14,7 @@ const ResourceUpload = () => {
       const formData = new FormData();
       formData.append("file", file);
       formData.append("name", name);
+      ``;
       formData.append("description", description);
       formData.append("workspace", params.id);
       const api = import.meta.env.VITE_API;
@@ -54,11 +55,11 @@ const ResourceUpload = () => {
           </div>
           <div className="form-control col-span-2">
             <label className="label">
-              <span className="label-text">File description</span>
+              <span className="label-text">File discription</span>
             </label>
             <input
               type="text"
-              placeholder="Enter the file description"
+              placeholder="Enter the file discription"
               className="input input-bordered"
               required
               value={description}

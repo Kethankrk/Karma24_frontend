@@ -82,11 +82,11 @@ const Forumpage = () => {
             </div>
             <div className="form-control flex-grow">
               <label className="label">
-                <span className="label-text">Description</span>
+                <span className="label-text">Discription</span>
               </label>
               <input
                 type="text"
-                placeholder="Enter question description."
+                placeholder="Enter question discription."
                 className="input input-bordered min-w-96"
                 required
                 value={description}

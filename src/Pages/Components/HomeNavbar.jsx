@@ -22,7 +22,6 @@ export default function HomeNavbar() {
           </Link>
         </div>
       </div>
-      <ChatBot />
     </div>
   );
 }

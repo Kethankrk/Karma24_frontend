@@ -1,9 +1,10 @@
 import ReactMarkdown from "react-markdown";
+import hero from "../../assets/team.svg";
 
 export default function WorkSpaceMainWindow() {
   const markdownContent = `# Welcome to Co-Project!
 
-  Welcome to our collaborative project management platform, where we streamline the process of bringing ideas to fruition, empowering teams to build projects quickly and efficiently.
+ 
   `;
   return (
     <div className="markdown-window px-8 py-4">
@@ -16,7 +17,17 @@ export default function WorkSpaceMainWindow() {
           Edit
         </button> */}
       </div>
-      <ReactMarkdown>{markdownContent}</ReactMarkdown>
+      <h1 className="text-4xl">Welcome to Co-Project!</h1>
+      <p className="max-w-[600px]">
+        Welcome to our collaborative project management platform, where we
+        streamline the process of bringing ideas to fruition, empowering teams
+        to build projects quickly and efficiently.
+      </p>
+      {/* <div className="flex w-full justify-center "> */}
+      <div className="max-w-[500px]">
+        <img src={hero} alt="" />
+        {/* </div> */}
+      </div>
     </div>
   );
 }

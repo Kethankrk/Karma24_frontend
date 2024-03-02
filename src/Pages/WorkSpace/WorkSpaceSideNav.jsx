@@ -89,10 +89,10 @@ export default function WorkSpaceSideNav() {
         <h1 className="text-xl font-bold">{name}</h1>
       </div>
       <button
-        className="btn btn-active btn-primary flex gap-4"
+        className="btn btn-active btn-primary flex gap-1 flex-wrap h-fit px-2"
         onClick={() => setpop(true)}
       >
-        <h1> New WorkSpace</h1>
+        <p className="text-sm">New WorkSpace</p>
         <svg
           viewBox="0 0 1024 1024"
           fill="currentColor"
