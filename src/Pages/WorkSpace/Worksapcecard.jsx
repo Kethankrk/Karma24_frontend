@@ -11,7 +11,7 @@ const Worksapcecard = ({ setpop, pop2, name, id, pages }) => {
           <a>{id}</a>
         </li> */}
         <li>
-          <details open>
+          <details>
             <summary>
               <a href={`/workspace/${id}`}>{name}</a>
             </summary>
