@@ -36,7 +36,7 @@ function ChatPage() {
         console.log(error);
       }
     })();
-  });
+  }, []);
 
   useEffect(() => {
     const ws = io("ws://192.168.137.219:3000");
