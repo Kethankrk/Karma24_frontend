@@ -16,6 +16,8 @@ import Createnewpage from "./Pages/WorkSpace/Createnewpage";
 import ChatPage from "./Pages/Chat/ChatPage";
 import CollabarativeTab from "./Pages/WorkSpace/CollabarativeTab";
 import CollabWorkspacePreview from "./Pages/WorkSpace/CollabWorkspacePreview";
+import ResourceViewPage from "./Pages/WorkSpace/Resource/ResourceViewPage";
+import ResourceUpload from "./Pages/WorkSpace/Resource/ResourceUpload";
 
 function App() {
   return (
@@ -35,6 +37,8 @@ function App() {
             <Route path="/chat/:id" element={<ChatPage />} />
             <Route path="/collabe/edit/:id" element={<CollabarativeTab />} />
             <Route path="/collabe/:id" element={<CollabWorkspacePreview />} />
+            <Route path="/resource/:id" element={<ResourceViewPage />} />
+            <Route path="/resource/upload/:id" element={<ResourceUpload />} />
 
             <Route path="/new" element={<NewWorkSpace />} />
             <Route path="/edit" element={<WorkSpaceEdit />} />

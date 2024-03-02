@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import ChatBot from "./ChatBot";
 
 export default function HomeNavbar() {
   return (
@@ -21,6 +22,7 @@ export default function HomeNavbar() {
           </Link>
         </div>
       </div>
+      <ChatBot />
     </div>
   );
 }

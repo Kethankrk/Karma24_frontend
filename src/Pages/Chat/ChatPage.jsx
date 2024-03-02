@@ -7,10 +7,7 @@ import { io } from "socket.io-client";
 function ChatPage() {
   const params = useParams();
   const id = params.id;
-  const [chats, Setchats] = useState([
-    { text: "Hello", isMine: true },
-    { text: "Hi", isMine: false },
-  ]);
+  const [chats, Setchats] = useState([]);
   const name = localStorage.getItem("name");
   const [socket, setSocket] = useState(null);
 
@@ -30,7 +27,6 @@ function ChatPage() {
     (async () => {
       try {
         const res = await axios.get(`http://192.168.137.219:3000/chat/${id}`);
-        console.log(res.data);
         res.data.map((item) =>
           Setchats((prev) => [
             ...prev,
@@ -71,7 +67,7 @@ function ChatPage() {
   const [value, setValue] = useState();
   return (
     <main className="px-8 py-3 flex items-start mt-6 flex-col">
-      <div className="w-full rounded-lg bg-base-300 min-w-[500px] max-w-[800px] max-h-[500px] min-h-[400px] overflow-y-auto p-10">
+      <div className="w-full rounded-lg bg-base-300  max-w-[800px] max-h-[500px] min-h-[400px] overflow-y-auto p-10">
         {chats.map((chat) =>
           !chat.isMine ? (
             <YourMessage text={chat.text} name={chat.name} />
@@ -81,7 +77,7 @@ function ChatPage() {
         )}
       </div>
       <form
-        className="max-w-[600px] min-w-[500px]  w-full rounded-md p-2 flex gap-1"
+        className="max-w-[600px]   w-full rounded-md p-2 flex gap-1"
         onSubmit={SendMessage}
       >
         {/* <MDEditor height={300} value={value} onChange={setValue} /> */}

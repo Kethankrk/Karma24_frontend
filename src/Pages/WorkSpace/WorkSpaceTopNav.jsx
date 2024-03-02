@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import ChatBot from "../Components/ChatBot";
 
 export default function WorkSpaceTopNav() {
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ export default function WorkSpaceTopNav() {
         {/* <a className="btn btn-ghost text-xl">Project-name</a> */}
       </div>
       <div className="navbar-end">
-        <button className="btn btn-ghost btn-circle">
+        {/* <button className="btn btn-ghost btn-circle">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5"
@@ -61,9 +62,9 @@ export default function WorkSpaceTopNav() {
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
             />
           </svg>
-        </button>
+        </button> */}
         <button className="btn btn-ghost btn-circle">
-          <div className="indicator">
+          {/* <div className="indicator">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -79,9 +80,10 @@ export default function WorkSpaceTopNav() {
               />
             </svg>
             <span className="badge badge-xs badge-primary indicator-item"></span>
-          </div>
+          </div> */}
         </button>
       </div>
+      <ChatBot />
     </div>
   );
 }

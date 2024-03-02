@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { io } from "socket.io-client";
+import ChatPage from "../Chat/ChatPage";
 
 const CollabarativeTab = () => {
   const params = useParams();
@@ -54,7 +55,8 @@ const CollabarativeTab = () => {
 
   return (
     <div className="px-8 py-4">
-      <div className="flex w-full justify-end gap-3">
+      <div className="flex w-full justify-between gap-3">
+        <h1 className="font-bold text-4xl">Collaborative workspace edit</h1>
         <button
           className="btn btn-primary w-40 mb-3"
           onClick={() => navigate(`/collabe/${id}`)}
@@ -65,11 +67,18 @@ const CollabarativeTab = () => {
           Commit changes
         </button> */}
       </div>
-      <MDEditor
-        height={window.innerHeight - 150}
-        value={markdownContent}
-        onChange={handleEditorChange}
-      />
+      <div className="grid grid-cols-5">
+        <div className="col-span-3">
+          <MDEditor
+            height={window.innerHeight - 150}
+            value={markdownContent}
+            onChange={handleEditorChange}
+          />
+        </div>
+        <div className="col-span-2">
+          <ChatPage />
+        </div>
+      </div>
     </div>
   );
 };
