@@ -6,6 +6,29 @@ const TodoComp = ({ title, id, complete, due_date, assigned }) => {
   const [check, Setcheck] = useState();
   const [titles, settitle] = useState(title);
   const api = import.meta.env.VITE_API;
+
+  const updateTodo = async (data) => {
+    try {
+      const api = import.meta.env.VITE_API;
+      const res = await axios.patch(`${api}core/todo/${id}/`, data);
+      settitle(res.data.title);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const DeleteTodo = async () => {
+    try {
+      const reponse = await axios.delete(`${api}core/todo/${id}/`);
+      console.log(id);
+      if (reponse.status == 204) {
+        window.location.reload();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const edit = async () => {
     // e.preventDefault();
     try {
@@ -36,11 +59,14 @@ const TodoComp = ({ title, id, complete, due_date, assigned }) => {
             <button className="btn btn-active py-1" onClick={() => edit()}>
               Change
             </button>
+            <button className="btn btn-error py-1" onClick={() => DeleteTodo()}>
+              Delete
+            </button>
           </div>
         ) : (
           <div className="flex w-full justify-between px-3">
             <p className="max-w-96">{title}</p>
-            <p className="max-w-96">nothing</p>
+            <p className="max-w-96">{assigned}</p>
             <p className="max-w-96 text-error">{due_date}</p>{" "}
           </div>
         )}
@@ -50,7 +76,10 @@ const TodoComp = ({ title, id, complete, due_date, assigned }) => {
           type="checkbox"
           defaultChecked={complete}
           className="checkbox checkbox-primary"
-          onChange={(e) => Setcheck(e.target.checked)}
+          onChange={(e) => {
+            Setcheck(e.target.checked);
+            updateTodo({ completed: e.target.checked });
+          }}
         />
         <button
           className="flex items-center"
